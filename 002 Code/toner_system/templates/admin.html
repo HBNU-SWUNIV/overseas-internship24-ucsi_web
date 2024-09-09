@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+
+<head id="Head1">
+    <title>Toner Management System</title>
+    <!-- Style -->
+    <link rel="stylesheet" href="/static/css/hanbat.css">
+    <link rel="icon" type="images/png" href="/static/img/logo2.png">
+
+    <style type="text/css">
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+    
+        /* 사이드바 스타일 */
+        .sidebar {
+            width: 250px;
+            background-color: #2c3e50;
+            position: fixed;
+            height: 100%;
+            top: 0;
+            left: -250px; /* 기본적으로 사이드바를 화면 밖에 숨김 */
+            transition: left 0.3s ease; /* 애니메이션 효과 */
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            z-index: 1000; /* 사이드바가 다른 요소 위에 있도록 설정 */
+            color: white;
+            opacity: 0.5;
+        }
+
+        .sidebar.open {
+            left: 0; /* 사이드바를 화면에 표시 */
+        }
+
+        .sidebar h2 {
+            margin-top: 0;
+            font-size: 18px;
+            color: white;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            margin: 15px 0;
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            display: block;
+            padding: 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: #34495e;
+        }
+    
+        /* 메인 컨텐츠 스타일 */
+        .main-content {
+            margin-left: 0;
+            padding: 20px;
+            flex-grow: 1;
+            transition: margin-left 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* 중앙 정렬 */
+            justify-content: center; /* 수직 중앙 정렬 */
+        }
+    
+        .main-content.shifted {
+            margin-left: 250px;
+        }
+        /* 대시보드 컨테이너 스타일 */
+        .dashboard-container {
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 효과 */
+            border-radius: 12px; /* 모서리를 둥글게 */
+            overflow: hidden; /* 둥근 모서리 외부로 콘텐츠가 넘치지 않도록 */
+            background-color: #ffffff; /* 배경색을 흰색으로 설정 */
+            padding: 20px; /* 컨테이너 내부에 여백을 추가 */
+            margin: 20px 0; /* 위아래에 여백 추가 */
+        }
+        
+        /* 대시보드 프레임 스타일 */
+        #dashboard-frame {
+            border-radius: 12px; /* 프레임 자체도 둥글게 */
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1); /* 프레임 내부에 그림자 */
+            width: 100%; /* 프레임이 컨테이너의 전체 너비를 차지하도록 설정 */
+            height: 600px; /* 고정된 높이, 필요에 따라 조정 가능 */
+        }
+        
+        /* 버튼 스타일 (예시) */
+        button {
+            background-color: #3498db; /* 파란색 배경 */
+            color: #fff; /* 흰색 글자 */
+            padding: 10px 20px; /* 내부 여백 */
+            border: none; /* 테두리 없음 */
+            border-radius: 5px; /* 모서리를 둥글게 */
+            font-size: 16px; /* 글자 크기 */
+            cursor: pointer; /* 마우스 포인터가 버튼 위에 있을 때 손가락 모양으로 변경 */
+            transition: background-color 0.3s ease; /* 배경색 전환 효과 */
+        }
+        
+        button:hover {
+            background-color: #2980b9; /* 호버 시 어두운 파란색으로 변경 */
+        }
+        
+        button:active {
+            background-color: #1c598a; /* 클릭 시 더 어두운 파란색으로 변경 */
+        }
+        
+    
+        .dashboard-container {
+            width: 80%; /* 적절한 너비를 설정 */
+            max-width: 1200px; /* 최대 너비 설정 */
+            height: 100%;
+            overflow: hidden;
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+        }
+        
+        
+        .toggle-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: #d01717;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+            z-index: 1001;
+            transition: left 0.3s ease;
+        }
+    
+        .toggle-btn.shifted {
+            left: 270px;
+        }
+    
+        .toggle-btn:hover {
+            background-color: #fe76b3d5;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="toggle-btn" id="toggle-btn" onclick="toggleSidebar()">☰ Menu</button>
+
+    <div class="sidebar" id="sidebar">
+        <h2>Admin Page</h2>
+        <ul>
+            <li><a href="{{ url_for('admin_page') }}">Home</a></li>
+            <li><a href="{{ url_for('Done_order') }}">Order Log</a></li>
+            <li><a href="{{ url_for('approval_page') }}">Approval</a></li>
+            <li><a href="{{ url_for('add_stock') }}">Stock Manager</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+        </ul>
+    </div>  
+    
+    <div class="main-content">
+        <h1>Welcome to the Admin Page!</h1>
+        <p>This page is for admin.</p>
+
+        <h2>Toner Inventory Dashboard</h2>
+        <div class="dashboard-container">
+            <iframe id="dashboard-frame" src="{{ url_for('dashboard') }}" style="border:none;width:100%;"></iframe>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function toggleSidebar() {
+            var sidebar = document.getElementById('sidebar');
+            var toggleBtn = document.getElementById('toggle-btn');
+            if (sidebar.classList.contains('open')) {
+                sidebar.classList.remove('open');
+                toggleBtn.classList.remove('shifted');
+            } else {
+                sidebar.classList.add('open');
+                toggleBtn.classList.add('shifted');
+            }
+        }
+
+        function resizeIframe() {
+            var iframe = document.getElementById('dashboard-frame');
+            iframe.style.height = window.innerHeight + 'px';
+        }
+    
+        window.onresize = resizeIframe;
+        window.onload = resizeIframe;
+    </script>
+</body>
+
+
+</html>

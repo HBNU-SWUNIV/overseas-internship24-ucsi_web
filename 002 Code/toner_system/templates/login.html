@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="images/png" href="/static/img/logo2.png">
+    <title>UCSI University Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: url('/static/img/school.png') no-repeat center center fixed; /* Set background image */
+            background-size: cover; /* Cover the entire screen with the image */
+        }
+        .login-container {
+            background-color: rgba(255, 255, 255, 0.8); /* Set opacity */
+            padding: 40px; /* Padding inside the login container */
+            border-radius: 8px; /* Border radius */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Box shadow */
+            width: 900px; /* Width of the login container */
+            display: flex;
+            justify-content: space-between; /* Space between child elements */
+            align-items: center; /* Vertically center child elements */
+        }
+        .left-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center align */
+            width: 50%; /* Width 50% */
+            margin-right: 60px; /* Right margin */
+        }
+        .left-section img {
+            width: 300px; /* Image width */
+            margin-bottom: 20px; /* Bottom margin */
+        }
+        .left-section h1 {
+            margin: 0; /* Remove default margin */
+            font-size: 24px; /* Font size */
+            color: #333; /* Font color */
+        }
+        .left-section p {
+            margin-top: 10px; /* Top margin */
+            font-size: 16px; /* Font size */
+            color: #666; /* Font color */
+        }
+        .right-section {
+            width: 50%; /* Width 50% */
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end; /* Right align */
+            justify-content: center; /* Vertically center */
+        }
+        .right-section form {
+            width: 100%; /* Form width 100% */
+            max-width: 500px; /* Maximum width */
+        }
+        .form-group {
+            display: flex;
+            align-items: center; /* Vertically center */
+            margin-bottom: 20px; /* Bottom margin */
+        }
+        .form-group label {
+            width: 150px; /* Label width */
+            margin-right: 10px; /* Right margin */
+            text-align: right; /* Right align text */
+            color: #333; /* Text color */
+        }
+        .form-group input {
+            width: 250px; /* Input field width */
+            padding: 10px; /* Padding inside the input field */
+            border: 1px solid #ccc; /* Border */
+            border-radius: 4px; /* Border radius */
+            text-align: left; /* Left align text */
+        }
+        .right-section button {
+            width: 63%; /* Button width */
+            padding: 12px 0; /* Padding inside the button */
+            background-color: #b71c1c; /* Background color */
+            border: none; /* No border */
+            border-radius: 4px; /* Border radius */
+            color: #fff; /* Text color */
+            font-size: 18px; /* Font size */
+            cursor: pointer; /* Mouse cursor */
+            margin-top: 20px; /* Top margin */
+            margin-left: 160px; /* Left margin */
+        }
+        .right-section button:hover {
+            background-color: #e14a6e; /* Background color on hover */
+        }
+        .footer {
+            margin-top: 20px; /* Top margin */
+            font-size: 12px; /* Font size */
+            color: #888; /* Font color */
+            text-align: center; /* Center align text */
+        }
+        /* Flash message style */
+        .flash-message {
+            color: red; /* Text color for the flash message */
+            font-size: 16px; /* Font size */
+            margin-bottom: 20px; /* Bottom margin */
+            text-align: center; /* Center align text */
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="left-section">
+            <img src="/static/img/logo.png" alt="UCSI University Logo"> 
+            <h1>Login</h1>
+            <p>Use your UCSI account</p>
+        </div>
+        <div class="right-section">
+            <form method="POST">
+
+
+                <div class="form-group">
+                    <label for="username">ID</label>
+                    <input type="text" id="id" name="id" required> 
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label> 
+                    <input type="password" id="password" name="password" required>
+                </div>
+
+                            
+                
+                <button type="submit">Login</button> 
+            </form>
+            <div class="footer">
+                <p>You don't have account? Then create account!</p>
+                <p><a href="{{ url_for('register') }}">Create account</a></p>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>

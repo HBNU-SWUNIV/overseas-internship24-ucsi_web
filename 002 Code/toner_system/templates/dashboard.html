@@ -1,0 +1,136 @@
+<html>
+
+<head id="Head1">
+    <title>Toner Management System</title>
+    <!-- Style -->
+    <link rel="stylesheet" href="/static/css/hanbat.css">
+    <link rel="icon" type="images/png" href="/static/img/logo2.png">
+
+    <style type="text/css">
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* 사이드바 스타일 */
+        .sidebar {
+            width: 250px;
+            background-color: #f4f4f4;
+            position: fixed;
+            height: 100%;
+            top: 0;
+            left: -250px; /* 기본적으로 사이드바를 화면 밖에 숨김 */
+            transition: left 0.3s ease; /* 애니메이션 효과 */
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            z-index: 1000; /* 사이드바가 다른 요소 위에 있도록 설정 */
+        }
+
+        .sidebar.open {
+            left: 0; /* 사이드바를 화면에 표시 */
+        }
+
+        .sidebar h2 {
+            margin-top: 0;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            margin: 10px 0;
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+            display: block;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: #ddd;
+        }
+
+        .toggle-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: #d01717;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+            z-index: 1001; /* 버튼이 사이드바 위에 있도록 설정 */
+            transition: left 0.3s ease; /* 애니메이션 효과 */
+        }
+
+        .toggle-btn.shifted {
+            left: 270px; /* 사이드바가 열렸을 때 버튼의 위치를 오른쪽으로 이동 */
+        }
+
+        .toggle-btn:hover {
+            background-color: #fe76b3d5;
+        }
+    </style>
+</head>
+<body>
+    <button class="toggle-btn" id="toggle-btn" onclick="toggleSidebar()">☰ Menu</button>
+
+    <div class="sidebar" id="sidebar">
+        <h2>Admin Page</h2>
+        <ul>
+            <li><a href="{{ url_for('admin_page') }}">Home</a></li>
+            <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ url_for('approval_page') }}">Approval</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+        </ul>
+    </div>
+
+    <script type="text/javascript">
+        function toggleSidebar() {
+            var sidebar = document.getElementById('sidebar');
+            var toggleBtn = document.getElementById('toggle-btn');
+            if (sidebar.classList.contains('open')) {
+                sidebar.classList.remove('open');
+                toggleBtn.classList.remove('shifted');
+            } else {
+                sidebar.classList.add('open');
+                toggleBtn.classList.add('shifted');
+            }
+        }
+    </script>
+
+    <hr>
+    <h1>Admin Dashboard</h1>
+    <p>This page is only accessible by administrators.</p>
+
+</body>
+<footer>
+    <div class="footer-content">
+        &copy; 2024 UCSI Toner Management System. All rights reserved. A member of UCSI Group
+    </div>
+    <br>
+    <div class="footer-content">
+        call : 000-0000-0000
+    </div>
+</footer>
+<script>
+    window.addEventListener('scroll', function() {
+        const footer = document.querySelector('footer');
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+            footer.style.bottom = '0'; // 스크롤 끝에 도달하면 footer를 보이게 설정
+        } else {
+            footer.style.bottom = '-100px'; // 스크롤이 끝나지 않으면 footer를 숨김
+        }
+    });
+</script>
+</html>
+

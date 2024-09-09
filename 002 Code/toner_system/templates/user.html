@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toner Application System</title>
+    <link rel="stylesheet" href="/static/css/hanbat.css">
+    <link rel="icon" type="images/png" href="/static/img/logo2.png">
+    <style>
+        /* 전체 페이지 스타일 */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e6e6e6;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* 헤더 스타일 */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background-color: white;
+            color: #333;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header .logo img {
+            width: 270px; /* 로고 크기 확대 */
+            width: 20vw; /* 뷰포트 너비의 20% 크기로 이미지 너비 설정 */
+            height: auto; /* 이미지의 비율을 유지하면서 높이를 자동으로 설정 */
+        }
+
+        .header .title {
+            font-size: 24px;
+            font-weight: bold;
+            padding-right: 170px;
+            font-size: 2vw; /* 뷰포트 너비의 5% 크기로 글자 크기 설정 */
+        }
+
+        .header .menu {
+            display: flex;
+            align-items: center;
+            background-color: #c0392b;/* 빨간색 배경 */
+            border-radius: 4px; /* 모서리 둥글게 */
+            padding: 5px 10px; /* 패딩 추가 */
+        }
+
+        .header .menu a {
+            color: white; /* 기본 텍스트 색상 흰색 */
+            text-decoration: none;
+            padding: 8px 16px;
+            transition: background-color 0.3s ease, color 0.3s ease; /* 배경색과 텍스트 색상 변경 시 애니메이션 효과 추가 */
+        }
+
+        .header .menu a:hover {
+            background-color: #c0392b; /* 호버 시 배경색 */
+            color: #fff; /* 호버 시 텍스트 색상 */
+        }
+
+        /* 페이지 제목과 설명 스타일 */
+        .welcome-section h1, 
+        .welcome-section p {
+            color: rgb(85, 81, 81); /* 텍스트 색상 흰색 */
+            text-align: center; /* 가운데 정렬 */
+            margin-top: 20px; /* 상단 여백 추가 */
+        }
+
+        /* 폼 스타일 */
+        .form-container {
+            width: 80%;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .form {
+            box-shadow: 100px 100px 100px rgba(23, 23, 23, 0.1) !important;
+        }
+
+        .form-container select,
+        .form-container input[type="number"],
+        .form-container input[type="submit"],
+        .form-container input[type="reset"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        /* 버튼 스타일 (빨간색 계열) */
+        .form-container input[type="submit"],
+        .form-container input[type="reset"] {
+            background-color: #c0392b;
+            
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-container input[type="submit"]:hover,
+        .form-container input[type="reset"]:hover {
+            background-color: #ffc3bc;
+        }
+
+        /* Flash 메시지 스타일 */
+        .flash-message p {
+            color: #c0392b;
+            font-size: 16px;
+            margin-top: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- 헤더 부분 -->
+    <header class="header">
+        <div class="logo">
+            <img src="/static/img/logo.png" alt="UCSI University Logo">
+        </div>
+        <div class="title">UCSI Toner Application System</div>
+        <div class="menu">
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+    </header>
+
+    <div class="welcome-section">
+        <h1>Welcome to the User Page!</h1>
+        <p>This page is for regular users.</p>
+    </div>
+
+    <div class="form-container">
+        <form action="/user" method="POST">
+            <label for="brand">Printer Brand</label>
+            <select id="brand" name="brand" onchange="loadToners()" required>
+                <option value="" disabled selected>Select Printer Brand</option>
+                <option value="Samsung">Samsung</option>
+                <option value="HP">HP</option>
+                <option value="LG">LG</option>
+                <option value="EPSON">EPSON</option>
+            </select>
+            <br/>
+
+            <label for="toner">Toner</label>
+            <select id="toner" name="toner" required>
+                <option value="" disabled selected>Select Toner</option>
+            </select>
+            <br/>
+
+            <label for="color">Color</label>
+            <select id="color" name="color" onchange="updateColor()" required>
+                <option value="" disabled selected>Select Toner Color</option>
+                <option value="black" style="color: black;">Black</option>
+                <option value="red" style="color: red;">Red</option>
+                <option value="green" style="color: green;">Green</option>
+                <option value="blue" style="color: blue;">Blue</option>
+            </select>
+            <br/>
+
+            <label for="amount">Amount</label>
+            <input type="number" id="amount" name="amount" placeholder="Enter amount" min="1" required>
+            <br/>
+
+            <!-- Flash message 표시 부분 (폼 안에 위치) -->
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="flash-message">
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            <input type="reset" value="Reset">
+            <input type="submit" value="Submit">   
+        </form>
+    </div>
+
+    <script>
+        function loadToners() {
+            const brand = document.getElementById('brand').value;
+            fetch('/get_toners', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'brand=' + encodeURIComponent(brand)
+            })
+            .then(response => response.json())
+            .then(data => {
+                const tonerSelect = document.getElementById('toner');
+                tonerSelect.innerHTML = '<option value="" disabled selected>Select Toner</option>';
+                data.toners.forEach(toner => {
+                    const option = document.createElement('option');
+                    option.value = toner;
+                    option.textContent = toner;
+                    tonerSelect.appendChild(option);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching toners:', error);
+            });
+        }
+
+        function updateColor() {
+            const colorSelect = document.getElementById('color');
+            const selectedColor = colorSelect.value;
+            colorSelect.style.color = selectedColor;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/hanbat.css">
+    <link rel="icon" type="images/png" href="/static/img/logo2.png">
+    <title>Order Database</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        /* 기본 테이블 스타일 */
+        table {
+            width: 100%;
+            border-collapse: collapse; /* 테이블 셀 간의 간격 제거 */
+            margin-bottom: 20px; /* 테이블 아래 여백 추가 */
+            border-radius: 8px; /* 테이블에 둥근 모서리 추가 */
+            overflow: hidden; /* 둥근 모서리 외부로 내용이 넘치지 않도록 설정 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 효과 추가 */
+            font-size: 18px; /* 테이블 내부 텍스트 크기 증가 */
+            border: 3px solid #3498db; /* 테이블 외곽 테두리 크기 및 색상 */
+        }
+        
+        /* 테이블 셀 스타일 */
+        th, td {
+            padding: 15px 20px; /* 셀 내부 여백 증가 */
+            text-align: left; /* 텍스트를 왼쪽 정렬 */
+            border: 2px solid #e0e0e0; /* 셀 경계선 두께 증가 */
+            font-size: 18px; /* 셀 내부 텍스트 크기 증가 */
+        }
+        
+        /* 테이블 헤더 스타일 */
+        th {
+            background-color: #3498db; /* 블루 테마 */
+            color: #ffffff; /* 헤더 텍스트를 흰색으로 설정 */
+            text-transform: uppercase; /* 텍스트 대문자로 변환 */
+            letter-spacing: 0.05em; /* 글자 간격을 조금 넓게 설정 */
+            font-weight: bold; /* 글자 굵기 */
+            font-size: 20px; /* 헤더 텍스트 크기 증가 */
+        }
+        
+        /* 테이블 행 스타일 */
+        tr:nth-child(even) {
+            background-color: #f8f8f8; /* 짝수 행에 배경색 적용 */
+        }
+        
+        tr:nth-child(odd) {
+            background-color: #ffffff; /* 홀수 행에 배경색 적용 */
+        }
+        
+        /* 테이블 행 호버 효과 */
+        tr:hover {
+            background-color: #e0f7fa; /* 행에 마우스를 올리면 밝은 블루 배경 적용 */
+            transition: background-color 0.3s ease; /* 배경색 전환 효과 */
+        }
+        
+        /* 테두리 색상 */
+        th, td {
+            border-color: #3498db; /* 셀 테두리 색상을 블루로 설정 */
+        }
+        
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+    
+        /* 사이드바 스타일 */
+        .sidebar {
+            width: 250px;
+            background-color: #2c3e50;
+            position: fixed;
+            height: 100%;
+            top: 0;
+            left: -250px; /* 기본적으로 사이드바를 화면 밖에 숨김 */
+            transition: left 0.3s ease; /* 애니메이션 효과 */
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            z-index: 1000; /* 사이드바가 다른 요소 위에 있도록 설정 */
+            color: white;
+            opacity: 0.5;
+        }
+
+        .sidebar.open {
+            left: 0; /* 사이드바를 화면에 표시 */
+        }
+
+        .sidebar h2 {
+            margin-top: 0;
+            font-size: 18px;
+            color: white;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            margin: 15px 0;
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            display: block;
+            padding: 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: #34495e;
+        }
+    
+        /* 메인 컨텐츠 스타일 */
+        .main-content {
+            margin-left: 0;
+            padding: 20px;
+            flex-grow: 1;
+            transition: margin-left 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* 중앙 정렬 */
+            justify-content: center; /* 수직 중앙 정렬 */
+        }
+    
+        .main-content.shifted {
+            margin-left: 250px;
+        }
+        
+        
+        /* 버튼 스타일 (예시) */
+        button {
+            background-color: #3498db; /* 파란색 배경 */
+            color: #fff; /* 흰색 글자 */
+            padding: 10px 20px; /* 내부 여백 */
+            border: none; /* 테두리 없음 */
+            border-radius: 5px; /* 모서리를 둥글게 */
+            font-size: 16px; /* 글자 크기 */
+            cursor: pointer; /* 마우스 포인터가 버튼 위에 있을 때 손가락 모양으로 변경 */
+            transition: background-color 0.3s ease; /* 배경색 전환 효과 */
+        }
+        
+        button:hover {
+            background-color: #2980b9; /* 호버 시 어두운 파란색으로 변경 */
+        }
+        
+        button:active {
+            background-color: #1c598a; /* 클릭 시 더 어두운 파란색으로 변경 */
+        }
+                
+        .toggle-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: #d01717;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+            z-index: 1001;
+            transition: left 0.3s ease;
+        }
+    
+        .toggle-btn.shifted {
+            left: 270px;
+        }
+    
+        .toggle-btn:hover {
+            background-color: #fe76b3d5;
+        }
+    </style>
+</head>
+<body>
+    <button class="toggle-btn" id="toggle-btn" onclick="toggleSidebar()">☰ Menu</button>
+
+    <div class="sidebar" id="sidebar">
+        <h2>Admin Page</h2>
+        <ul>
+            <li><a href="{{ url_for('admin_page') }}">Home</a></li>
+            <li><a href="{{ url_for('Done_order') }}">Order Log</a></li>
+            <li><a href="{{ url_for('approval_page') }}">Approval</a></li>
+            <li><a href="{{ url_for('add_stock') }}">Stock Manager</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+        </ul>
+    </div>
+    <div class="main-content">
+        <h1>Order Database</h1>
+        {{ table_html|safe }}
+    </div>  
+    <script type="text/javascript">
+        function toggleSidebar() {
+            var sidebar = document.getElementById('sidebar');
+            var toggleBtn = document.getElementById('toggle-btn');
+            if (sidebar.classList.contains('open')) {
+                sidebar.classList.remove('open');
+                toggleBtn.classList.remove('shifted');
+            } else {
+                sidebar.classList.add('open');
+                toggleBtn.classList.add('shifted');
+            }
+        }
+
+        function resizeIframe() {
+            var iframe = document.getElementById('dashboard-frame');
+            iframe.style.height = window.innerHeight + 'px';
+        }
+    
+        window.onresize = resizeIframe;
+        window.onload = resizeIframe;
+    </script>
+</body>
+
+</html>

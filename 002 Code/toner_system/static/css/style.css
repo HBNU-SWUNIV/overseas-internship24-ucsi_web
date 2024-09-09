@@ -1,0 +1,714 @@
+﻿body {
+    font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    background-color: #fff;
+    height: 200vh;
+    position: relative;
+    left: 0px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    transition: .3s all ease;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1;
+}
+
+body.offcanvas-menu:before {
+    opacity: 1;
+    z-index: 1002;
+    visibility: visible;
+}
+
+p {
+    color: #000000;
+    font-weight: 300;
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+a {
+    transition: .3s all ease;
+}
+
+    a, a:hover {
+        text-decoration: none !important;
+    }
+
+.hero {
+    height: 100vh;
+    width: 100%;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.top-bar {
+    padding: .5rem 0;
+    border-bottom: 1px solid #666666;
+}
+
+    .top-bar a {
+        color: #666666;
+    }
+
+.logotop {
+    padding: 15px;
+}
+
+.site-navbar {
+    margin-bottom: 0px;
+    z-index: 1999;
+    position: relative;
+    width: 100%;
+    padding: 1rem;
+}
+
+.main_menu, .main_menu:hover {
+    width: 160px;
+    background-color: rgba(255, 255, 255, 0);
+    color: #000;
+    text-align: center;
+    height: 30px;
+    line-height: 30px;
+    margin-right: 5px;
+}
+
+    .main_menu:hover {
+        background-color: #ccc;
+    }
+
+.level_menu, .level_menu:hover {
+    width: 200px;
+    background-color: #fff;
+    color: rgba(255, 255, 255, 1);
+    text-align: center;
+    line-height: 30px;
+    padding: 10px;
+}
+
+    .level_menu:hover {
+        background-color: #ccc;
+    }
+
+.selected, .selected:hover {
+    background-color: #A6A6A6 !important;
+    color: #fff;
+}
+
+.level2 {
+    background-color: #fff;
+    border: 1px solid;
+    border-radius: 8px;
+}
+
+.style1 {
+    width: 100%;
+}
+
+.style2 {
+    width: 100%;
+}
+
+.style3 {
+    height: 16px;
+}
+
+.style5 {
+    margin: 20px;
+    text-align: center;
+    width: 1000px;
+}
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#login-form-wrap {
+    background-color: #fff;
+    width: 500px;
+    margin: 30px auto;
+    text-align: center;
+    padding: 50px 0 0 0;
+    border-radius: 4px;
+    box-shadow: 0px 30px 50px 0px rgba(0, 0, 0, 0.2);
+}
+
+#login-form {
+    padding: 0 60px;
+}
+
+input {
+    border: 1px solid;
+    box-sizing: border-box;
+    width: 70%;
+    outline: none;
+    border-radius: 4px;
+}
+
+    input[type="password"],
+    input[type="text"] {
+        width: 70%;
+        padding: 0 0 0 10px;
+        margin: 0;
+        color: black;
+        border: 1px solid rgba(51, 51, 51, 0.78);
+        font-style: normal;
+        font-size: 16px;
+        appearance: none;
+        position: relative;
+        display: inline-block;
+        background: none;
+        height: 30px;
+    }
+
+        .input-container input[type='text'] {
+            height: 44px;
+        }
+
+    input[type="submit"] {
+        border: none;
+        width: 70%;
+        display: block;
+        background-color: #ff0000;
+        color: #fff;
+        font-weight: bold;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-size: 17px;
+        position: relative;
+        display: inline-block;
+        text-align: center;
+    }
+
+        input[type="submit"]:hover {
+            background-color: #850000;
+            transition: all 0.2s ease;
+        }
+
+        .apply-button input[type="submit"] {
+            width: 100%;
+        }
+
+#create-account-wrap {
+    background-color: #eeedf1;
+    color: #8a8b8e;
+    font-size: 14px;
+    width: 100%;
+    padding: 10px 0;
+    border-radius: 0 0 4px 4px;
+}
+
+.main {
+    width: 100%;
+    background: white;
+    border-radius: 3px;
+    padding: 30px;
+    position: relative;
+    display: flex;
+}
+
+    .main .form_wrapper {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+        .main .form_wrapper .tile {
+            text-align: center;
+            margin-bottom: 20px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+            .main .form_wrapper .tile h3 {
+                font-size: 22px;
+                font-family: Arial;
+                font-weight: 600;
+                transition: all 0.3s ease;
+            }
+
+        .main .form_wrapper .radio {
+            display: none;
+        }
+
+        .main .form_wrapper .tab {
+            width: 50%;
+            border: solid 2px #f1f1f1;
+            height: 40px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 16px;
+            margin-bottom: 40px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            user-select: none;
+        }
+
+        .main .form_wrapper .shape {
+            background: linear-gradient(45deg, #FF0000, #f33d3d) no-repeat center;
+            width: 50%;
+            height: 40px;
+            border-radius: 5px;
+            position: absolute;
+            top: 118px;
+            left: 0px;
+            opacity: 0.9;
+            transition: all 0.4s ease;
+        }
+
+            .main .form_wrapper .shape:hover {
+                background: linear-gradient(-45deg, #FF0000, #780000) no-repeat center;
+            }
+
+        .main .form_wrapper #login:checked ~ .shape {
+            left: 0px;
+        }
+
+        .main .form_wrapper #login:checked ~ .login_tab {
+            border-color: transparent;
+            z-index: 1;
+            color: white;
+        }
+
+        .main .form_wrapper #login:checked ~ .signup_tab {
+            border-color: transparent;
+            background: lightgray;
+        }
+
+        .main .form_wrapper #login:checked ~ .tile .signup {
+            display: none;
+        }
+
+        .main .form_wrapper #login:checked ~ .form_wrap {
+            transform: translateX(0);
+        }
+
+            .main .form_wrapper #login:checked ~ .form_wrap .signup_form {
+                opacity: 0;
+            }
+
+        .main .form_wrapper #signup:checked ~ .shape {
+            left: 50%;
+        }
+
+        .main .form_wrapper #signup:checked ~ .signup_tab {
+            border-color: transparent;
+            z-index: 1;
+            color: white;
+        }
+
+        .main .form_wrapper #signup:checked ~ .login_tab {
+            border-color: transparent;
+            background: lightgray;
+        }
+
+        .main .form_wrapper #signup:checked ~ .tile .login {
+            display: none;
+        }
+
+        .main .form_wrapper #signup:checked ~ .form_wrap {
+            transform: translateX(-100%);
+        }
+
+            .main .form_wrapper #signup:checked ~ .form_wrap .login_form {
+                opacity: 0;
+            }
+
+        .main .form_wrapper a {
+            color: #ff0000;
+            text-decoration: none;
+            transition: all 0.3s linear;
+        }
+
+            .main .form_wrapper a:hover {
+                color: #b14747;
+            }
+
+        .main .form_wrapper .form_wrap {
+            display: flex;
+            width: 100%;
+            flex: 0 0 100%;
+            transition: transform 0.3s ease, opacity 0.2s ease;
+        }
+
+            .main .form_wrapper .form_wrap .form_fild {
+                width: 100%;
+                flex: 0 0 100%;
+                transition: all 0.5s ease;
+            }
+
+                .main .form_wrapper .form_wrap .form_fild .input_group {
+                    width: 100%;
+                    margin-bottom: 12px;
+                }
+
+                    .main .form_wrapper .form_wrap .form_fild .input_group .input {
+                        border: solid #f1f1f1 2px;
+                        border-radius: 5px;
+                        width: 100%;
+                        height: 40px;
+                        padding: 5px 10px;
+                        font-size: 15px;
+                        font-weight: 500;
+                        outline: none;
+                        transition: all 0.3s linear;
+                    }
+
+                        .main .form_wrapper .form_wrap .form_fild .input_group .input::placeholder {
+                            color: #adadad;
+                        }
+
+                        .main .form_wrapper .form_wrap .form_fild .input_group .input:hover {
+                            border-color: rgba(248, 66, 151, 0.3);
+                        }
+
+                        .main .form_wrapper .form_wrap .form_fild .input_group .input:focus {
+                            border-color: rgba(248, 66, 151, 0.3);
+                        }
+
+                .main .form_wrapper .form_wrap .form_fild .forgot {
+                    display: block;
+                    margin-bottom: 15px;
+                    padding: 0px 2px;
+                }
+
+                .main .form_wrapper .form_wrap .form_fild .btn {
+                    width: 100%;
+                    height: 40px;
+                    margin-bottom: 20px;
+                    border: none;
+                    outline: none;
+                    font-size: 16px;
+                    font-weight: 500;
+                    letter-spacing: 0.8px;
+                    color: white;
+                    background: linear-gradient(45deg, #FF0000, #780000) no-repeat center;
+                    border-radius: 5px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    transition: all 0.3s linear;
+                }
+
+                    .main .form_wrapper .form_wrap .form_fild .btn:hover {
+                        background: linear-gradient(-45deg, #FF0000, #780000) no-repeat center;
+                    }
+
+                    .main .form_wrapper .form_wrap .form_fild .btn:active {
+                        transform: scale(0.95);
+                    }
+
+                .main .form_wrapper .form_wrap .form_fild .not_mem {
+                    text-align: center;
+                }
+
+                    .main .form_wrapper .form_wrap .form_fild .not_mem label {
+                        pointer-events: none;
+                    }
+
+                        .main .form_wrapper .form_wrap .form_fild .not_mem label span {
+                            pointer-events: all;
+                            color: #ff0000;
+                            text-decoration: none;
+                            transition: all 0.3s linear;
+                        }
+
+                            .main .form_wrapper .form_wrap .form_fild .not_mem label span:hover {
+                                color: #a547b1;
+                            }
+
+/* JobAgg Page CSS */
+
+.filter-bar {
+    display: flex;
+    justify-content: center;
+    padding: 10px 20px;
+    background-color: #fff;
+    border-bottom: 1px solid #ccc;
+}
+
+.filter-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.input-container {
+    position: relative;
+    margin-right: 10px;
+}
+
+.icon {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+}
+
+.input-container input,
+.input-container select {
+    padding: 10px 10px 10px 35px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+.filter-container button {
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+    .filter-container button:hover {
+        background-color: #555;
+    }
+
+.content {
+    display: flex;
+    justify-content: space-between;
+    /*height: 300vh;*/
+}
+
+.job-list {
+    position: absolute;
+    left: 0%;
+    width: 50%;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #fff;
+    transition: left .8s ease-in-out;
+}
+
+    .job-list ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .job-list li {
+        margin-bottom: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+        padding: 15px;
+    }
+
+        .job-list li:hover,
+        .job-list li.active {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+    .job-list p {
+        white-space: pre-wrap;
+        color: #555;
+        line-height: 1.6;
+    }
+
+.job-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.job-summary {
+    padding: 15px;
+}
+
+.job-position {
+    color: #333;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.job-detail {
+    color: #555;
+    font-size: 0.9em;
+    margin-bottom: 8px;
+    border-left: 3px solid #ccc;
+    padding-left: 10px;
+}
+
+.job-date {
+    color: #999;
+    font-size: 0.8em;
+    margin-bottom: 8px;
+}
+
+.job-tags {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.job-tags .job-location,
+ .job-tags .job-type {
+        display: inline-block;
+        background-color: #e0e0e0;
+        color: #333;
+        padding: 5px 10px;
+        border-radius: 4px;
+        font-size: 0.9em;
+
+}
+
+#showMoreButton {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+}
+
+    #showMoreButton:hover {
+        background-color: #555;
+    }
+
+.job-title {
+    font-size: 1.3em; /* 제목 크기 설정 */
+    font-weight: bold; /* 제목 굵기 설정 */
+    margin-top: 10px; /* 상단 마진 설정 */
+    margin-bottom: 15px; /* 하단 마진 설정 */
+    color: #333; /* 제목 색상 설정 */
+}
+
+.job-description {
+    width: 50%;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: sticky;
+    top: 0px;
+    left: 50%;
+    /*height: calc(100vh - 140px);*/
+    max-height: none;
+}
+
+    .job-description ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .job-description li:first-child {
+        margin-bottom: 20px;
+        margin-top: 10px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.2s;
+        padding: 15px;
+    }
+
+    .job-description li:hover,
+    .job-description li.active {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .job-description p {
+        white-space: pre-wrap;
+        color: #555;
+        line-height: 1.6;
+    }
+
+.responsibility-detail, .requirement-detail {
+    padding-left: 20px; /* 오른쪽에서 시작하도록 패딩 추가 */
+    position: relative; /* 포지션을 상대적으로 설정하여 점을 추가 */
+    margin-bottom: 5px; /* 각 항목의 하단 마진 설정 */
+}
+
+.responsibility-detail::before, .requirement-detail::before {
+    content: '•'; /* 점 추가 */
+    position: absolute; /* 점을 절대적으로 위치 */
+    left: 0; /* 점을 div의 왼쪽에 위치 */
+    color: #000; /* 점의 색상 설정 */
+    font-size: 1.2em; /* 점의 크기 설정 */
+    line-height: 1.5; /* 점의 세로 위치를 텍스트와 맞춤 */
+}
+
+.section-title {
+    font-size: 1em; /* 글씨 크기 설정 */
+    font-weight: bold; /* 글씨 굵기 설정 */
+    margin-top: 20px; /* 상단 마진 설정 */
+    margin-bottom: 10px; /* 하단 마진 설정 */
+    color: #333; /* 글씨 색상 설정 */
+}
+
+.apply-button {
+    display: block;
+    width: auto;
+    padding: 10px 20px;
+    background-color: #dc3545; /* 빨간색 */
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    align-self: flex-start;
+    text-decoration: none;
+}
+
+    .apply-button:hover {
+        background-color: #c82333; /* 호버시 더 어두운 빨간색 */
+    }
+
+.hidden {
+    display: none;
+}
+
+.button-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+

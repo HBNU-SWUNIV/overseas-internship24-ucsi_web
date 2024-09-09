@@ -1,0 +1,11 @@
+user_id,id,password,name,email,department
+1,user,user,USER,user@example.com,IT
+2,admin,admin,ADMIN,admin@example.com,admin
+3,jD12,1234,John Doe,john@example.com,Sales
+4,JSM123,5678,Jane Smith,jane@example.com,Marketing
+5,AJD019,258,Alice Johnson,alice@example.com,Development
+6,test123,test123,Test Account,test123@gmail.com,IT
+7,test321,test321,12345,test321@gmail.com,UCSI
+8,hello,hello,hello world,hello@world.com,Hello
+9,test,test123,Test2344,test@naver.com,IT
+10,hyeonwoo,hyeonwoo,Hyeon Woo Kim,poiuytrewq201249@gmail.com,IT

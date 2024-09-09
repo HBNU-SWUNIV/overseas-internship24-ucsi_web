@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Style -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style type="text/css">
+        #Menu1 img.icon {
+            border-style: none;
+            vertical-align: middle;
+        }
+
+        #Menu1 img.separator,
+        #Menu1 img.horizontal-separator {
+            border-style: none;
+            display: block;
+        }
+
+        #Menu1 ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            width: auto;
+        }
+
+        #Menu1 ul.dynamic {
+            z-index: 1;
+        }
+
+        #Menu1 a {
+            text-decoration: none;
+            white-space: nowrap;
+            display: block;
+        }
+
+        #Menu1 a.static {
+            padding-left: 0.15em;
+            padding-right: 0.15em;
+        }
+
+        #Menu1 a.popout {
+            background-repeat: no-repeat;
+            background-position: right center;
+            padding-right: 14px;
+        }
+
+        #Menu1 a.level1,
+        #Menu1 a.level2,
+        #Menu1 a.static.selected {
+            text-decoration: none;
+            border-style: none;
+        }
+    </style>
+    <title>Application Approval</title>
+</head>
+<body>
+    <table cellpadding="0" cellspacing="0" width="100%" style="background-color:white;">
+        <tbody>
+            <tr class="top-bar">
+                <td width="20%">
+                    <img src="{{ url_for('static', filename='img/logo.png') }}" class="logotop" alt="Logo">
+                </td>
+                <td width="40%" style="padding-top:20px">
+                    <span id="lblUserStatus" style="display:inline-block; color:black; font-family:'Microsoft Sans Serif'; font-size:10.5pt; font-weight:bold; width:500px;">
+                        UCSI Toner Management System
+                    </span>
+                </td>
+                <td width="40%" style="padding-top:20px; padding-right:20px;">
+                    <div id="Menu1" style="float: left;">
+                        <ul class="level1 static" role="menubar" style="position: relative; width: auto; float: left;">
+                            <li role="menuitem" class="static" style="position: relative; float: left;">
+                                <a class="level1 main_menu static" href="JobListing.aspx">Home</a>
+                            </li>
+                            <li class="has-popup static" aria-haspopup="Menu1:submenu:3" role="menuitem" style="position: relative; float: left;">
+                                <a class="popout level1 main_menu static" href="javascript:;">My Profile</a>
+                            </li>
+                            <li role="menuitem" class="static" style="position: relative; float: left;">
+                                <a class="level1 main_menu static" href="{{ url_for('logout') }}">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div style="clear: left;"></div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <h1>Application Approval</h1>
+    <p>This page is only accessible by administrators.</p>
+    <h2>Send e-mail</h2>
+    <main>
+        <h4>select</h4>
+        <form action="/send_mail" method="post">
+            <select id="select" name="select" required onchange="this.form.submit()">
+                <option value=""> select</option>
+                <option value="승인"> 승인 </option>
+                <option value="보류"> 보류 </option>
+                <option value="거절"> 거절 </option>
+            </select>
+        </form>
+        {% if msg == '승인' %}
+            <h3>날짜 입력</h3>
+            <form action="/approve" method="post">
+                date <input type="date" id="date" name='date' required><br>
+                time <input type="time" id="time" name='time' required><br>
+                <input type="submit" value="Submit">
+            </form>
+        {% endif %}
+        {% if msg == '보류' %}
+            <h3>보류</h3>
+            <form action="/Defer" method="post">
+                <select id="Defer" name="Defer" required>
+                    <option value=""> select</option>
+                    <option value="a"> a </option>
+                    <option value="b"> b </option>
+                    <option value="c"> c </option>
+                </select>
+                <input type="submit" value="Submit">
+            </form>
+        {% endif %}
+        {% if msg == '거절' %}
+            <h3>거절</h3>
+            <form action="/reject" method="post">
+                <select id="reject" name="reject" required>
+                    <option value=""> select</option>
+                    <option value="a"> a </option>
+                    <option value="b"> b </option>
+                    <option value="c"> c </option>
+                </select>
+                <input type="submit" value="Submit">
+            </form>
+        {% endif %}
+
+        <!-- OrderDB.csv 데이터를 표로 표현 !-->
+        <h2>OrderDB</h2>
+        <div id="orderTable">
+            {{ table_html|safe}}
+        </div>
+
+    </main>
+    <a href="{{ url_for('logout') }}">Logout</a>
+
+</body>
+</html>

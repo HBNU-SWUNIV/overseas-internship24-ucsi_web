@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Approval</title>
+    <link rel="stylesheet" href="/static/css/hanbat.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+        }
+
+        /* 사이드바 스타일 */
+        .sidebar {
+            width: 250px;
+            background-color: #2c3e50;
+            position: fixed;
+            height: 100%;
+            top: 0;
+            left: -250px; /* 기본적으로 사이드바를 화면 밖에 숨김 */
+            transition: left 0.3s ease; /* 애니메이션 효과 */
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            z-index: 1000; /* 사이드바가 다른 요소 위에 있도록 설정 */
+            color: white;
+            opacity: 0.5;
+        }
+
+        .sidebar.open {
+            left: 0; /* 사이드바를 화면에 표시 */
+        }
+
+        .sidebar h2 {
+            margin-top: 0;
+            font-size: 18px;
+            color: white;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            margin: 15px 0;
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            display: block;
+            padding: 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: #34495e;
+        }
+
+        .toggle-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+            z-index: 1001; /* 버튼이 사이드바 위에 있도록 설정 */
+            transition: left 0.3s ease; /* 애니메이션 효과 */
+        }
+
+        .toggle-btn.shifted {
+            left: 270px; /* 사이드바가 열렸을 때 버튼의 위치를 오른쪽으로 이동 */
+        }
+
+        .toggle-btn:hover {
+            background-color: #c0392b;
+        }
+
+        h1 {
+            padding-top: 20px;
+            padding-left: 20px;
+            color: #333;
+        }
+
+        p {
+            padding-left: 20px;
+            color: #666;
+        }
+
+        /* 초기 상태에서 select 폼과 선택된 정보를 숨김 */
+        #actionSelect, #dateForm, #deferForm, #rejectForm, #selectedInfo {
+            display: none;
+            margin-top: 20px;
+            padding-left: 20px;
+        }
+
+        .flash-message {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+
+        .flash-message.success {
+            border-color: #4CAF50;
+            background-color: #DFF2BF;
+            color: #4CAF50;
+        }
+
+        .flash-message.error {
+            border-color: #f44336;
+            background-color: #FFBABA;
+            color: #f44336;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        form h3 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        form input[type="submit"] {
+            background-color: #2ecc71;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        form input[type="submit"]:hover {
+            background-color: #27ae60;
+        }
+
+        select, input[type="date"], input[type="time"] {
+            padding: 8px;
+            width: 100%;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        /* 반응형 디자인 */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 200px;
+            }
+
+            .toggle-btn.shifted {
+                left: 220px; /* 사이드바가 열렸을 때 버튼의 위치를 조정 */
+            }
+
+            .toggle-btn {
+                left: 15px;
+            }
+
+            h1, p, #actionSelect, #dateForm, #deferForm, #rejectForm, #selectedInfo {
+                padding-left: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="toggle-btn" id="toggle-btn" onclick="toggleSidebar()">☰ Menu</button>
+
+    <div class="sidebar" id="sidebar">
+        <h2>Admin Page</h2>
+        <ul>
+            <li><a href="{{ url_for('admin_page') }}">Home</a></li>
+            <li><a href="{{ url_for('Done_order') }}">Order Log</a></li>
+            <li><a href="{{ url_for('approval_page') }}">Approval</a></li>
+            <li><a href="{{ url_for('add_stock') }}">Stock Manager</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+        </ul>
+    </div>
+
+    <h1>Application Approval</h1>
+    <p>This page is only accessible by administrators.</p>
+
+    <!-- Flash 메시지를 표시하는 섹션 -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-container">
+                {% for category, message in messages %}
+                    <div class="flash-message {{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <div id="orderTable">
+        {{ table_html|safe }}
+    </div>
+
+    <!-- 라디오 버튼 선택 시 나타나는 select 요소 -->
+    <div id="actionSelect">
+        <!-- 선택된 정보 표시 -->
+        <form method="POST" action="/process_orders" id="orderForm">
+            <div id="selectedInfo"></div>
+            <br/>
+            <label for="select_action">Select Action:</label>
+            <select id="select_action" name="select_action" required onchange="this.form.submit()">
+                <option value="">Select</option>
+                <option value="approve">Approve</option>
+                <option value="defer">Defer</option>
+                <option value="reject">Reject</option>
+            </select>
+            <input type="hidden" name="order_id" id="order_id"> <!-- order_id 필드 -->
+            <input type="hidden" name="user_id" id="user_id"> <!-- user_id 필드 -->
+        </form>
+    </div>
+
+    <!-- 조건부 렌더링된 폼들 -->
+    <div id="dateForm">
+        <form action="/approve" method="post">
+            <div id="selectedInfoInForm">
+                {% if selected_order %}
+                    <p>Selected Order: {{ selected_order }}</p>
+                {% else %}
+                    <p>No order selected.</p>
+                {% endif %}
+            </div>
+            <h3>Select appointment date/time</h3>
+            <input type="date" id="date" name="date" required><br>
+            <input type="time" id="time" name="time" required><br>
+            <input type="submit" value="Process Selected Order">
+        </form>
+    </div>
+
+    <div id="deferForm">
+        <form action="/Defer" method="post">
+            <div id="selectedInfoInForm">
+                {% if selected_order %}
+                    <p>Selected Order: {{ selected_order }}</p>
+                {% else %}
+                    <p>No order selected.</p>
+                {% endif %}
+            </div>
+            <h3>Defer</h3>
+            <select id="Defer" name="Defer" required>
+                <option value="">Select</option>
+                <option value="a">Option A</option>
+                <option value="b">Option B</option>
+                <option value="c">Option C</option>
+            </select>
+            <input type="submit" value="Process Selected Order">
+        </form>
+    </div>
+
+    <div id="rejectForm">
+        <form action="/reject" method="post">
+            <div id="selectedInfoInForm">
+                {% if selected_order %}
+                    <p>Selected Order: {{ selected_order }}</p>
+                {% else %}
+                    <p>No order selected.</p>
+                {% endif %}
+            </div>
+            <h3>Reject</h3>
+            <select id="reject" name="reject" required>
+                <option value="">Select</option>
+                <option value="a">Option A</option>
+                <option value="b">Option B</option>
+                <option value="c">Option C</option>
+            </select>
+            <input type="submit" value="Process Selected Order">
+        </form>
+    </div>
+
+    <script>
+        // 라디오 버튼 선택 시 select 요소와 선택된 정보를 보이게 함
+        function showActionButtons(orderInfo, userId) {
+            console.log("Selected Order Info: ", orderInfo);  // 디버깅용 출력
+            console.log("User ID: ", userId);  // 디버깅용 출력
+        
+            document.getElementById('actionSelect').style.display = 'block';
+            document.getElementById('selectedInfo').style.display = 'block';
+            document.getElementById('selectedInfo').innerText = "Selected Order: " + orderInfo;
+        
+            // hidden 필드에 order_id와 user_id 설정
+            document.getElementById('order_id').value = orderInfo;  // order_id로 전달할 값을 설정
+            document.getElementById('user_id').value = userId;  // user_id로 전달할 값을 설정
+        }
+
+        // 페이지 로드 시 msg 값을 기반으로 적절한 폼을 보여줌
+        window.onload = function() {
+            var msg = "{{ msg }}";
+            showFormBasedOnMsg(msg);
+        }
+
+        function showFormBasedOnMsg(msg) {
+            var selectedInfo = document.getElementById('selectedInfo').innerText;
+            var selectedInfoInForm = document.getElementById('selectedInfoInForm');
+            
+            if (selectedInfoInForm) {
+                selectedInfoInForm.innerText = selectedInfo;
+            }
+
+            if (msg === 'approve') {
+                document.getElementById('dateForm').style.display = 'block';
+            } else if (msg === 'defer') {
+                document.getElementById('deferForm').style.display = 'block';
+            } else if (msg === 'reject') {
+                document.getElementById('rejectForm').style.display = 'block';
+            }
+        }
+
+        function toggleSidebar() {
+            var sidebar = document.getElementById('sidebar');
+            var toggleBtn = document.getElementById('toggle-btn');
+            if (sidebar.classList.contains('open')) {
+                sidebar.classList.remove('open');
+                toggleBtn.classList.remove('shifted');
+            } else {
+                sidebar.classList.add('open');
+                toggleBtn.classList.add('shifted');
+            }
+        }
+    </script>
+</body>
+</html>

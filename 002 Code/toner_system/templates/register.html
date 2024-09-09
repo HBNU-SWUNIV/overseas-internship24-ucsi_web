@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/static/img/logo2.png"> <!-- 페이지의 파비콘 설정 -->
+    <title>Create Account - UCSI University</title> <!-- 페이지 제목 설정 -->
+    <style>
+        body {
+            font-family: Arial, sans-serif; /* 기본 글꼴 설정 */
+            background-color: #fbeaea; /* 배경색을 빨간색으로 설정 */
+            margin: 0; /* 기본 마진 제거 */
+            display: flex; /* 플렉스 박스 레이아웃 사용 */
+            justify-content: center; /* 수평 중앙 정렬 */
+            align-items: center; /* 수직 중앙 정렬 */
+            height: 100vh; /* 뷰포트 높이의 100% 설정 */
+            flex-direction: column; /* 수직 방향 플렉스 레이아웃 */
+        }
+        .logo-container {
+            margin-bottom: 40px; /* 아래쪽 여백 설정 */
+            text-align: center; /* 텍스트 중앙 정렬 */
+        }
+        .logo-container img {
+            max-width: 100%; /* 화면 너비에 맞게 이미지 크기 조정 */
+            height: auto; /* 비율 유지하면서 높이 자동 조정 */
+            transform: translateY(-20px);
+        }
+        .account-container {
+            background-color: #ffffff; /* 컨테이너 배경색 설정 */
+            padding: 40px; /* 컨테이너 내부 패딩 */
+            border-radius: 8px; /* 모서리 반경 설정 */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 박스 그림자 설정 */
+            width: 700px; /* 컨테이너의 너비 설정 */
+            text-align: left; /* 텍스트 왼쪽 정렬 */
+            display: flex; /* 플렉스 박스 레이아웃 사용 */
+            flex-direction: column; /* 플렉스 박스의 방향을 열(세로)로 설정 */
+            align-items: center; /* 컨테이너 내부 요소들을 중앙에 배치 */
+            transform: translateY(-30px);
+        }
+        .header {
+            display: flex; /* 플렉스 박스 레이아웃 사용 */
+            flex-direction: column; /* 플렉스 방향을 세로로 설정 */
+            align-items: center; /* 수직 중앙 정렬 */
+            margin-bottom: 20px; /* 하단 마진 설정 */
+        }
+        .header h1 {
+            font-size: 24px; /* 제목의 폰트 크기 설정 */
+            color: #333; /* 제목의 색상 설정 */
+            margin: 10px 0 0 0; /* 제목의 마진 제거 */
+        }
+        .form-group-container {
+            display: flex; /* 플렉스 박스 레이아웃 사용 */
+            justify-content: space-between; /* 자식 요소들 사이에 공간을 균등하게 배분 */
+            width: 100%; /* 컨테이너의 너비를 100%로 설정 */
+        }
+        .form-group {
+            width: 48%; /* 입력 필드들이 나란히 배치되도록 너비를 48%로 설정 */
+            margin-bottom: 20px; /* 하단 마진 설정 */
+        }
+        .form-group:not(:last-child) {
+            margin-right: 100px; /* 마지막 form-group을 제외한 요소들에 오른쪽 여백 추가 */
+        }
+        .form-group label {
+            display: block; /* 레이블을 블록 요소로 설정하여 줄바꿈 적용 */
+            margin-bottom: 5px; /* 레이블과 입력 필드 사이의 간격 설정 */
+            color: #333; /* 레이블의 텍스트 색상 설정 */
+        }
+        .form-group input {
+            width: 100%; /* 입력 필드의 너비를 부모 요소의 100%로 설정 */
+            padding: 10px; /* 입력 필드 내부의 패딩 설정 */
+            border: 1px solid #ccc; /* 입력 필드 테두리 설정 */
+            border-radius: 4px; /* 입력 필드의 모서리 반경 설정 */
+            font-size: 16px; /* 입력 필드의 폰트 크기 설정 */
+        }
+        .account-container button {
+            width: 105%; /* 버튼의 너비를 부모 요소의 105%로 설정 */
+            padding: 12px; /* 버튼 내부의 패딩 설정 */
+            background-color: rgb(199, 57, 74); /* 버튼의 배경색 설정 */
+            border: none; /* 버튼의 테두리 제거 */
+            border-radius: 4px; /* 버튼의 모서리 반경 설정 */
+            color: #fff; /* 버튼의 텍스트 색상 설정 */
+            font-size: 19px; /* 버튼의 폰트 크기 설정 */
+            cursor: pointer; /* 버튼에 마우스 커서를 올렸을 때 포인터 표시 */
+            margin: 0 auto; /* 버튼을 중앙에 배치 */
+        }
+        .account-container button:hover {
+            background-color: #df5c7b; /* 마우스 오버 시 버튼의 배경색 변경 */
+        }
+        .footer {
+            margin-top: 20px; /* 상단 마진 설정 */
+            font-size: 12px; /* 텍스트의 폰트 크기 설정 */
+            color: #888; /* 텍스트 색상 설정 */
+            text-align: center; /* 텍스트 중앙 정렬 */
+        }
+        .footer a {
+            color: #b71c1c; /* 링크의 텍스트 색상 설정 */
+            text-decoration: none; /* 링크의 밑줄 제거 */
+        }
+        .bottom-text {
+            position: fixed; /* 창 하단에 고정 */
+            bottom: 0; /* 하단 위치 */
+            width: 100%; /* 전체 너비 차지 */
+            background-color: rgba(232, 182, 188, 0.682); /* 배경색 변경 (여기서 원하는 색으로 변경 가능) */
+            color: #fff; /* 글자색을 흰색으로 변경 */
+            text-align: center; /* 텍스트를 가운데 정렬 */
+            padding: 10px 0; /* 위아래 패딩 추가 */
+            
+            z-index: 1000; /* 다른 요소들 위에 표시되도록 설정 */
+            font-size: 14px; /* 폰트 크기 조정 */
+        }
+    </style>
+</head>
+<body>
+    <div class="logo-container">
+        <a href="/">
+            <img src="/static/img/logo.png" alt="UCSI University Logo"> <!-- 로고 이미지 -->
+        </a>
+    </div>
+    <div class="account-container">
+        <div class="header">
+            <h1>Create Account</h1> <!-- 페이지 제목 -->
+        </div>
+        <form method="POST" action="/create_account"> <!-- 회원가입 폼 -->
+            <div class="form-group-container"> <!-- 이름과 로그인 ID 필드를 포함한 컨테이너 -->
+                <div class="form-group">
+                    <label for="username">Name</label> <!-- 이름 레이블 -->
+                    <input type="text" id="username" name="username" required> <!-- 이름 입력 필드 -->
+                </div>
+                <div class="form-group">
+                    <label for="id">Login ID</label> <!-- 로그인 ID 레이블 -->
+                    <input type="text" id="id" name="id" required> <!-- 로그인 ID 입력 필드 -->
+                </div>
+            </div>
+            <div class="form-group-container"> <!-- 이메일과 부서 필드를 포함한 컨테이너 -->
+                <div class="form-group">
+                    <label for="email">Email</label> <!-- 이메일 레이블 -->
+                    <input type="email" id="email" name="email" required> <!-- 이메일 입력 필드 -->
+                </div>
+                <div class="form-group">
+                    <label for="department">Department</label> <!-- 부서 레이블 -->
+                    <input type="text" id="department" name="department" required> <!-- 부서 입력 필드 -->
+                </div>
+            </div>
+            <div class="form-group-container"> <!-- 비밀번호와 비밀번호 확인 필드를 포함한 컨테이너 -->
+                <div class="form-group">
+                    <label for="password">Password</label> <!-- 비밀번호 레이블 -->
+                    <input type="password" id="password" name="password" required> <!-- 비밀번호 입력 필드 -->
+                </div>
+                <div class="form-group">
+                    <label for="confirm_password">Confirm Password</label> <!-- 비밀번호 확인 레이블 -->
+                    <input type="password" id="confirm_password" name="confirm_password" required> <!-- 비밀번호 확인 입력 필드 -->
+                </div>
+            </div>
+            <button type="submit">Create Account</button> <!-- 계정 생성 버튼 -->
+        </form>
+        <div class="footer">
+            <p>Already have an account? <a href="/login">Log in</a></p> <!-- 로그인 링크 -->
+        </div>
+    </div>
+    <div class="bottom-text">
+        &copy; 2024 UCSI Toner Management System. All rights reserved. A member of UCSI Group<br>
+        Call: <!-- 여기에 전화번호를 추가하세요 -->
+    </div>
+</body>
+</html>
